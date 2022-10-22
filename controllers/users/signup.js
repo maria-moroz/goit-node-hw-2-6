@@ -1,4 +1,5 @@
 const createError = require("http-errors");
+const gravatar = require("gravatar");
 const { User } = require("../../models");
 
 async function signup(req, res) {
@@ -8,12 +9,13 @@ async function signup(req, res) {
     throw createError(409, "Email in use");
   }
 
-  const newUser = new User({ email, password, subscription });
+  const avatarUrl = gravatar.url(email);
+  const newUser = new User({ email, password, subscription, avatarUrl });
   newUser.setPassword(password);
   newUser.save();
 
   res.status(201).json({
-    user: { email, subscription },
+    user: { email, subscription, avatarUrl },
   });
 }
 

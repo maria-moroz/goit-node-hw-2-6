@@ -20,6 +20,10 @@ const userSchema = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
+    avatarUrl: {
+      type: String,
+      required: true,
+    },
     token: {
       type: String,
       default: null,
@@ -42,6 +46,7 @@ const signupSchema = Joi.object({
   email: Joi.string().required(),
   password: Joi.string().required(),
   subscription: Joi.string().valid("starter", "pro", "business"),
+  avatarUrl: Joi.string(),
 });
 
 const loginSchema = Joi.object({

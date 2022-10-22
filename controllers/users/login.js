@@ -22,7 +22,7 @@ async function login(req, res) {
 
   res.status(200).json({
     token,
-    user: { email, subscription: user.subscription },
+    user: { email, subscription: user.subscription, avatarUrl: user.avatarUrl },
   });
 }
 
